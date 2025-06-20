@@ -12,7 +12,9 @@ from .helpers import sanitize_name
 
 
 class Downloader:
+    """Small wrapper around ``yt_dlp`` for downloading media."""
     def __init__(self, output_dir: Path, log_file: Path | None = None, debug: bool = False) -> None:
+        """Create a downloader writing files to *output_dir*."""
         self.output_dir = output_dir
         self.output_dir.mkdir(parents=True, exist_ok=True)
         self.logger = setup_logger("downloader", log_file, debug)
@@ -33,6 +35,7 @@ class Downloader:
         self.logger.info(f"Downloaded {url}")
 
     def download_batch(self, urls: List[str], quality: str = "best", audio_only: bool = False) -> None:
+        """Download a list of *urls* concurrently."""
         futs = [self.executor.submit(self._download, u.strip(), quality, audio_only) for u in urls if u.strip()]
         for f in futs:
             f.result()

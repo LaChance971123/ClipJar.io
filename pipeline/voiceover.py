@@ -18,6 +18,7 @@ load_dotenv()
 
 
 class VoiceOverGenerator:
+    """Create voiceovers via ElevenLabs or Coqui TTS."""
     def __init__(
         self,
         engine: str,
