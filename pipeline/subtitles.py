@@ -9,6 +9,7 @@ from .helpers import create_dummy_subtitles
 
 
 class SubtitleGenerator:
+    """Generate subtitles using Whisper and export to ASS format."""
     def __init__(self, style: str, model: str = "base", log_file: Optional[Path] = None, debug: bool = False):
         self.style = style
         self.model_name = model

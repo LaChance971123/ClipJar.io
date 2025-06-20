@@ -1,7 +1,5 @@
-python-dotenv
-requests
-whisper
-TTS
-PySide6
-yt_dlp
-python-docx
+python-dotenv==1.1.0
+requests==2.32.4
+whisper==1.1.10
+TTS==0.22.0
+yt_dlp==2025.6.9

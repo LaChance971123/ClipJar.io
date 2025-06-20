@@ -5,11 +5,13 @@ import subprocess
 from pathlib import Path
 from typing import Optional
 import shutil
+import tempfile
 
 from .logger import setup_logger
 
 
 class VideoRenderer:
+    """Render the final video using FFmpeg."""
     def __init__(
         self,
         bg_folder: Path,
@@ -188,9 +190,11 @@ class VideoRenderer:
             vf = ";".join(vf_parts) if wm and not subs else ",".join(vf_parts)
             cmd = base_cmd + ["-vf", vf]
 
+        temp_dir = None
         main_output = output_path
         if intro or outro:
-            main_output = output_path.with_name("_main.mp4")
+            temp_dir = tempfile.TemporaryDirectory()
+            main_output = Path(temp_dir.name) / "main.mp4"
 
         cmd += ["-s", self.resolution, main_output.as_posix()]
 
@@ -210,7 +214,7 @@ class VideoRenderer:
             raise RuntimeError("Render produced no output")
 
         if intro or outro:
-            concat = output_path.with_name("concat.txt")
+            concat = Path(temp_dir.name) / "concat.txt"
             with open(concat, "w") as f:
                 if intro:
                     f.write(f"file '{intro.as_posix()}'\n")
@@ -230,9 +234,12 @@ class VideoRenderer:
                 "copy",
                 output_path.as_posix(),
             ]
-            subprocess.run(cmd2, check=True)
-            main_output.unlink(missing_ok=True)
-            concat.unlink(missing_ok=True)
+            try:
+                subprocess.run(cmd2, check=True)
+            finally:
+                main_output.unlink(missing_ok=True)
+                concat.unlink(missing_ok=True)
+                temp_dir.cleanup()
 
         self.logger.info(f"Render complete: {output_path}")
 
