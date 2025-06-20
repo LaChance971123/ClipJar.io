@@ -13,8 +13,10 @@ except Exception:  # pragma: no cover - missing dependency
 
 
 class CLI:
+    """Command-line interface for the ClipJar pipeline."""
     @staticmethod
     def build_parser() -> argparse.ArgumentParser:
+        """Return the argument parser for the CLI."""
         parser = argparse.ArgumentParser(description="Video generation pipeline")
         parser.add_argument(
             "--version",
@@ -56,6 +58,7 @@ class CLI:
 
     @staticmethod
     def parse(args=None) -> argparse.Namespace:
+        """Parse command line *args* or ``sys.argv`` when ``None``."""
         parser = CLI.build_parser()
         return parser.parse_args(args)
 
@@ -80,6 +83,7 @@ def _read_script(args: argparse.Namespace) -> tuple[str, str]:
 
 
 def main(argv=None) -> None:
+    """Entry point for the ClipJar CLI."""
     from pipeline.pipeline import VideoPipeline
     from pipeline.logger import setup_logger
     from pipeline.helpers import color_print, log_trace, validate_files

@@ -20,8 +20,11 @@ from .config import Config
 
 
 class VideoPipeline:
+    """Orchestrates the voiceover, subtitles and rendering steps."""
     def __init__(self, config: Config, debug: bool = False, log_file: Path | None = None):
         self.config = config
+        log_file = Path(log_file or config.log_file)
+        log_file.parent.mkdir(parents=True, exist_ok=True)
         self.logger = setup_logger("pipeline", log_file, debug)
         self.debug = debug
         self.log_file = log_file
@@ -42,6 +45,7 @@ class VideoPipeline:
         crop_safe: bool = False,
         summary_overlay: bool = False,
     ) -> PipelineContext:
+        """Run the pipeline and return a :class:`PipelineContext`."""
         style = self.config.subtitle_style
         engine = self.config.voice_engine
         voice_id = self.config.default_voice_id

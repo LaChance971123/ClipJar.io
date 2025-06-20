@@ -10,6 +10,7 @@ import os
 
 @dataclass
 class Config:
+    """Application configuration loaded from ``config.json``."""
     subtitle_style: str = "simple"
     watermark_path: str | None = None
     watermark_opacity: float = 1.0
@@ -21,6 +22,7 @@ class Config:
     background_videos_path: str = "assets/backgrounds"
     resolution: str = "1080x1920"
     ffmpeg_path: str = "ffmpeg"
+    log_file: str = "./logs/clipjar.log"
     step_timeout: int = 120
     safe_mode: bool = False
     developer_mode: bool = False

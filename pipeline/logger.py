@@ -3,6 +3,7 @@ from pathlib import Path
 
 
 def setup_logger(name: str, log_file: Path | None = None, debug: bool = False) -> logging.Logger:
+    """Return a configured logger writing to console and optional *log_file*."""
     logger = logging.getLogger(name)
     level = logging.DEBUG if debug else logging.INFO
     logger.setLevel(level)
