@@ -1,0 +1,25 @@
+{
+  "subtitle_style": "simple",
+  "watermark_path": "assets/watermark.png",
+  "watermark_opacity": 0.5,
+  "watermark_enabled": true,
+  "voice_engine": "elevenlabs",
+  "default_voice_id": "your_voice_id_here",
+  "coqui_model_name": "tts_models/en/ljspeech/tacotron2-DDC",
+  "whisper_model": "base",
+  "background_videos_path": "assets/backgrounds",
+  "resolution": "1080x1920",
+  "ffmpeg_path": "ffmpeg",
+  "step_timeout": 120,
+  "safe_mode": false,
+  "developer_mode": false,
+  "voices": {
+    "SampleVoice": "voice_sample_id"
+  },
+  "background_styles": {
+    "Minecraft": "assets/backgrounds/minecraft",
+    "GTA": "assets/backgrounds/gta",
+    "Rain": "assets/backgrounds/rain"
+  },
+  "resolutions": ["1080x1920", "1080x1080", "1920x1080"]
+}
