@@ -10,6 +10,7 @@
   "background_videos_path": "assets/backgrounds",
   "resolution": "1080x1920",
   "ffmpeg_path": "ffmpeg",
+  "log_file": "./logs/clipjar.log",
   "step_timeout": 120,
   "safe_mode": false,
   "developer_mode": false,

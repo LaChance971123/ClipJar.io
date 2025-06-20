@@ -86,6 +86,7 @@ def create_dummy_subtitles(path: Path) -> None:
 
 @dataclass
 class PipelineContext:
+    """Runtime information and output paths for a pipeline run."""
     script_text: str
     script_name: str
     output_dir: Path
